@@ -1,5 +1,6 @@
 package com.booking.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -8,14 +9,14 @@ public class Room {
     private Long privateId;
     private int price;
     private RoomType type;
-    private List<Booking> bookings;
+    private List<Booking> bookings = new ArrayList<>();
 
     private Room(Builder builder){
         this.publicId = builder.publicId;
         this.privateId = builder.privateId;
         this.price = builder.price;
         this.type = builder.type;
-        this.bookings = builder.bookings;
+        this.bookings = (builder.bookings != null) ? builder.bookings : new ArrayList<>();
     }
 
     public UUID getPublicId(){
@@ -36,6 +37,10 @@ public class Room {
 
      public List<Booking> getBookings(){
         return this.bookings;
+    }
+
+     public void addBookings(Booking booking){
+        this.bookings.add(booking);
     }
 
 
